@@ -270,6 +270,8 @@ def app4():
     tipo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"])
     if tipo == "Soja 1ra":
         region = form.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos","SE Bs As","S Cordoba"])
+    if tipo == "Soja 2da":
+        region = form.selectbox('Región: ', ["N Bs As / S Sta Fe"])
     propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
