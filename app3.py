@@ -279,7 +279,10 @@ def app4():
         region_options = []
 
     # Utilizar opciones determinadas para mostrar el segundo selectbox
-    region = form.selectbox('Región: ', region_options, key="region")
+    if hasattr(st.session_state, "region_options") and region_options != st.session_state.region_options:
+        st.session_state.region_options = region_options
+        st.session_state.region = None
+    region = form.selectbox('Región: ', st.session_state.region_options or [], key="region")
     propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
@@ -288,11 +291,6 @@ def app4():
     # Actualizar valor seleccionado en el primer selectbox
     if tipo != st.session_state.tipo:
         st.session_state.tipo = tipo
-        st.session_state.region = None
-
-    # Actualizar opciones del segundo selectbox según el valor seleccionado en el primero
-    if region_options != st.session_state.region_options:
-        st.session_state.region_options = region_options
         st.session_state.region = None
 
     # Actualizar valor seleccionado en el segundo selectbox
