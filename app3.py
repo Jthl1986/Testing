@@ -266,16 +266,43 @@ def app4():
     st.title("🌽 Planteo productivo")
     left, right = st.columns(2)
     left.write("Completar:")
+
     form = left.form("template_form")
-    tipo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da"])
+    tipo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da"], key="tipo")
+
+    # Determinar opciones del segundo selectbox según el valor seleccionado en el primero
     if tipo == "Soja 1ra":
-        region = form.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos"])
+        region_options = ["N Bs As / S Sta Fe","S Entre Ríos"]
     elif tipo == "Soja 2da":
-        region = form.selectbox('Región: ', ["SE Bs As","S Cordoba"])
+        region_options = ["SE Bs As","S Cordoba"]
+    else:
+        region_options = []
+
+    # Utilizar opciones determinadas para mostrar el segundo selectbox
+    region = form.selectbox('Región: ', region_options, key="region")
     propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
     submit = form.form_submit_button("Ingresar")
+
+    # Actualizar valor seleccionado en el primer selectbox
+    if tipo != st.session_state.tipo:
+        st.session_state.tipo = tipo
+        st.session_state.region = None
+
+    # Actualizar opciones del segundo selectbox según el valor seleccionado en el primero
+    if region_options != st.session_state.region_options:
+        st.session_state.region_options = region_options
+        st.session_state.region = None
+
+    # Actualizar valor seleccionado en el segundo selectbox
+    if region != st.session_state.region:
+        st.session_state.region = region
+
+    # Si se ha seleccionado un tipo de cultivo y una región, mostrar un mensaje con los valores seleccionados
+    if st.session_state.tipo is not None and st.session_state.region is not None:
+        st.write(f"Ha seleccionado el tipo de cultivo {st.session_state.tipo} y la región {st.session_state.region}")
+
 
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
     response = requests.get(url)
