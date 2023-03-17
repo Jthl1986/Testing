@@ -267,11 +267,11 @@ def app4():
     left, right = st.columns(2)
     left.write("Completar:")
     form = left.form("template_form")
-    tipo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"])
+    tipo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da"])
     if tipo == "Soja 1ra":
-        region = form.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos","SE Bs As","S Cordoba"])
-    if tipo == "Soja 2da":
-        region = form.selectbox('Región: ', ["N Bs As / S Sta Fe"])
+        region = form.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos"])
+    elif tipo == "Soja 2da":
+        region = form.selectbox('Región: ', ["SE Bs As","S Cordoba"])
     propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
@@ -292,13 +292,13 @@ def app4():
     arrendamiento = right.number_input("Gastos de arrendamiento", step=1)
     
     #unpacking
-    workbook = openpyxl.load_workbook(r'C:\Users\Usuario\Desktop\dataframe.xlsx')
-    worksheet = workbook.active
-    header = [cell.value for cell in next(worksheet.iter_rows())]
-    data = [cell.value for row in worksheet.iter_rows(min_row=2) for cell in row]
-    result = dict(zip(header, data))
-    for key, value in result.items():
-        globals()[key] = value
+    #workbook = openpyxl.load_workbook(r'C:\Users\Usuario\Desktop\dataframe.xlsx')
+    #worksheet = workbook.active
+    #header = [cell.value for cell in next(worksheet.iter_rows())]
+    #data = [cell.value for row in worksheet.iter_rows(min_row=2) for cell in row]
+    #result = dict(zip(header, data))
+    #for key, value in result.items():
+    #    globals()[key] = value
     
     #precio = psoja1*dol*rinde*cantidad
     
