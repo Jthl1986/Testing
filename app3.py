@@ -298,8 +298,6 @@ def app4():
         dol = float(value2)
     else:
         print("Failed to retrieve data")
-    right.metric("Dolar oficial", '${:,}'.format(float(dol)))
-    right.write("Cuadro gastos:")
     
     #unpacking
     #workbook = openpyxl.load_workbook(r'C:\Users\Usuario\Desktop\dataframe.xlsx')
