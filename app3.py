@@ -267,8 +267,12 @@ def app4():
     left, right = st.columns(2)
     left.write("Completar:")
     form = left.form("template_form")
-    region = form.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos","SE Bs As","S Cordoba"])
     tipo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"])
+    #if región == "Opción 1":
+    #    option2 = st.selectbox("Selecciona una subopción", ["Subopción 1", "Subopción 2"])
+    #elif option1 == "Opción 2":
+    #    option2 = st.selectbox("Selecciona otra subopción", ["Subopción 3", "Subopción 4"])
+    region = form.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos","SE Bs As","S Cordoba"])
     propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
