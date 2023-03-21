@@ -277,7 +277,7 @@ def app4():
         tipo_cultivo = "Soja 1ra"
 
     # Crear un menú desplegable para el tipo de cultivo y actualizar el valor en la sesión actual
-    tipo_cultivo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
+    tipo_cultivo = st.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
     st.session_state['tipo_cultivo'] = tipo_cultivo
 
     # Cerrar el formulario
