@@ -327,9 +327,9 @@ def app4():
         # Agregar las variables a la lista
         datos.append([region, propio, cantidad])
         df = pd.DataFrame(datos, columns=['Región', 'Tipo de explotación', 'Superficie (has)'])
-        css()
         # Imprimir la lista de datos
         st.table(df)
+        css()
         
         # API tipo de cambio
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
