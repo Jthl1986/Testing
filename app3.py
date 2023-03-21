@@ -265,20 +265,21 @@ def app3():
 
 def app4():
     st.title("🌽 Planteo productivo")
-    left, right = st.columns(2)
-    left.write("Completar:")
-    form = left.form("template_form")
-
+    
     # Obtener el valor actual de tipo de cultivo en la sesión actual
     tipo_cultivo = st.session_state.get('tipo_cultivo', None)
 
     # Si no hay un valor para tipo de cultivo, establecer el valor predeterminado como el primer elemento de la lista
     if tipo_cultivo is None:
         tipo_cultivo = "Soja 1ra"
-
+    
     # Crear un menú desplegable para el tipo de cultivo y actualizar el valor en la sesión actual
     tipo_cultivo = st.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
     st.session_state['tipo_cultivo'] = tipo_cultivo
+    
+    left, right = st.columns(2)
+    left.write("Completar:")
+    form = left.form("template_form")
 
     # Cerrar el formulario
     form.empty()
