@@ -326,9 +326,12 @@ def app4():
 
     # Agregar un botón de enviar para enviar los datos del formulario
     if form.form_submit_button("Ingresar"):
-        st.write(print(region, propio, cantidad, rinde))
-    else:
-        st.write("Seleccione un tipo de cultivo para continuar")
+        st.write("Valores ingresados:")
+        st.write("Tipo de cultivo:", tipo_cultivo)
+        st.write("Región:", region)
+        st.write("Tipo de explotación:", propio)
+        st.write("Superficie (has):", cantidad)
+        st.write("Rendimiento informado (en tn):", rinde)
 
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
     response = requests.get(url)
