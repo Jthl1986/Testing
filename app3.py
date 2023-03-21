@@ -267,6 +267,7 @@ def app4():
     st.title("🌽 Planteo productivo")
     left, right = st.columns(2)
     left.write("Completar:")
+    form = left.form("template_form")
 
     # Obtener el valor actual de tipo de cultivo en la sesión actual
     tipo_cultivo = st.session_state.get('tipo_cultivo', None)
@@ -276,7 +277,7 @@ def app4():
         tipo_cultivo = "Soja 1ra"
 
     # Crear un menú desplegable para el tipo de cultivo y actualizar el valor en la sesión actual
-    tipo_cultivo = left.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
+    tipo_cultivo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
     st.session_state['tipo_cultivo'] = tipo_cultivo
 
     # Si se ha seleccionado un tipo de cultivo, mostrar un menú desplegable para las regiones
@@ -291,12 +292,12 @@ def app4():
         # Agregar más opciones de región para los otros tipos de cultivo
 
         # Crear un menú desplegable para la región
-        region = left.selectbox('Región: ', region_options)
+        region = form.selectbox('Región: ', region_options)
 
-    propio = left.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
-    cantidad = left.number_input("Superficie (has): ", step=1)
-    rinde = left.number_input("Rendimiento informado (en tn)")
-    submit = left.form_submit_button("Ingresar")
+    propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
+    cantidad = form.number_input("Superficie (has): ", step=1)
+    rinde = form.number_input("Rendimiento informado (en tn)")
+    submit = form.form_submit_button("Ingresar")
 
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
     response = requests.get(url)
