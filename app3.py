@@ -283,55 +283,54 @@ def app4():
     # Cerrar el formulario
     form.empty()
 
-    # Obtener el valor actual de la región en la sesión actual
-    region = st.session_state.get('region', None)
+    # Si se ha seleccionado un tipo de cultivo, mostrar un menú desplegable para las regiones
+    if tipo_cultivo:
+        # Obtener el valor actual de la región en la sesión actual
+        region = st.session_state.get('region', None)
 
-    # Si no hay un valor para la región, establecer el valor predeterminado como el primer elemento de la lista correspondiente al tipo de cultivo
-    if region is None:
+        # Si no hay un valor para la región, establecer el valor predeterminado como el primer elemento de la lista correspondiente al tipo de cultivo
+        if region is None:
+            if tipo_cultivo == "Soja 1ra":
+                region = "Región 1"
+            elif tipo_cultivo == "Soja 2da":
+                region = "Región 4"
+            elif tipo_cultivo == "Trigo":
+                region = "Región 7"
+            # Agregar más opciones de región para los otros tipos de cultivo
+
+            st.session_state['region'] = region
+
+        # Crear un menú desplegable para la región y actualizar el valor en la sesión actual
+        region_options = []
         if tipo_cultivo == "Soja 1ra":
-            region = "Región 1"
+            region_options = ["Región 1", "Región 2", "Región 3"]
         elif tipo_cultivo == "Soja 2da":
-            region = "Región 4"
+            region_options = ["Región 4", "Región 5", "Región 6"]
         elif tipo_cultivo == "Trigo":
-            region = "Región 7"
-        # Agregar más opciones de región para los otros tipos de cultivo
+            region_options = ["Región 7", "Región 8", "Región 9"]
+        elif tipo_cultivo == "Maíz":
+            region_options = ["Región 10", "Región 11", "Región 12"]
+        elif tipo_cultivo == "Girasol":
+            region_options = ["Región 13", "Región 14", "Región 15"]
+        elif tipo_cultivo == "Sorgo":
+            region_options = ["Región 16", "Región 17", "Región 18"]
+        elif tipo_cultivo == "Cebada":
+            region_options = ["Región 19", "Región 20", "Región 21"]
+            
+    # Crear un formulario para ingresar los datos de la siembra
+    form_siem = right.form("template_form_siem")
 
-        st.session_state['region'] = region
-
-    # Crear un menú desplegable para la región y actualizar el valor en la sesión actual
-    region_options = []
-    if tipo_cultivo == "Soja 1ra":
-        region_options = ["Región 1", "Región 2", "Región 3"]
-    elif tipo_cultivo == "Soja 2da":
-        region_options = ["Región 4", "Región 5", "Región 6"]
-    elif tipo_cultivo == "Trigo":
-        region_options = ["Región 7", "Región 8", "Región 9"]
-    elif tipo_cultivo == "Maíz":
-        region_options = ["Región 10", "Región 11", "Región 12"]
-    elif tipo_cultivo == "Girasol":
-        region_options = ["Región 13", "Región 14", "Región 15"]
     # Crear un menú desplegable para la región
-    region = form.selectbox('Región: ', region_options, index=[i for i, x in enumerate(region_options) if x == region][0])
-    propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
-    cantidad = form.number_input("Superficie (has): ", step=1)
-    rinde = form.number_input("Rendimiento informado (en tn)")
+    region = form_siem.selectbox('Región: ', region_options)
+    propio = form_siem.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
+    cantidad = form_siem.number_input("Superficie (has): ", step=1)
+    rinde = form_siem.number_input("Rendimiento informado (en tn)")
 
-    # Almacenar los valores ingresados por el usuario en la sesión actual
-    st.session_state['region'] = region
-    st.session_state['propio'] = propio
-    st.session_state['cantidad'] = cantidad
-    st.session_state['rinde'] = rinde
-
-    # Cerrar el formulario
-    form.empty()
-
-    # Mostrar los valores ingresados por el usuario
-    st.write("Tipo de cultivo:", tipo_cultivo)
-    st.write("Región:", region)
-    st.write("Tipo de explotación:", propio)
-    st.write("Superficie (has):", cantidad)
-    st.write("Rendimiento informado (en tn):", rinde)
-
+    # Agregar un botón de enviar para enviar los datos del formulario
+    if form_siem.form_submit_button("Ingresar"):
+        st.write("Formulario enviado con éxito!")
+    else:
+        st.write("Seleccione un tipo de cultivo para continuar")
 
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
     response = requests.get(url)
