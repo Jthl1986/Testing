@@ -326,7 +326,7 @@ def app4():
 
     # Agregar un botón de enviar para enviar los datos del formulario
     if form.form_submit_button("Ingresar"):
-        st.write("Formulario enviado con éxito!")
+        st.write(print(region, propio, cantidad, rinde))
     else:
         st.write("Seleccione un tipo de cultivo para continuar")
 
