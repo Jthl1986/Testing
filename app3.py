@@ -268,11 +268,21 @@ def app4():
     left.write("Completar:")
     form = left.form("template_form")
     tipo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"])
-    #if región == "Opción 1":
-    #    option2 = st.selectbox("Selecciona una subopción", ["Subopción 1", "Subopción 2"])
-    #elif option1 == "Opción 2":
-    #    option2 = st.selectbox("Selecciona otra subopción", ["Subopción 3", "Subopción 4"])
-    region = form.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos","SE Bs As","S Cordoba"])
+
+    # create a dictionary to store the regions for each crop type
+    region_options = {
+        "Soja 1ra": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
+        "Soja 2da": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
+        "Trigo": ["N Bs As / S Sta Fe", "S Entre Ríos", "SE Bs As"],
+        "Maíz": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
+        "Girasol": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
+        "Sorgo": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
+        "Cebada": ["N Bs As / S Sta Fe", "S Entre Ríos", "SE Bs As", "S Cordoba"]
+    }
+
+    # display the sub-menu based on the crop type selected by the user
+    region = form.selectbox('Región: ', region_options[tipo])
+
     propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
