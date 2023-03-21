@@ -153,7 +153,7 @@ def app1():
     ptrigo= data2.iloc[2,1]
     pptrigo = int(ptrigo[1:])
     pgira= data2.iloc[4,1]
-    ppgira = int(pgira[1:])
+    ppgira = 74400 #int(pgira[1:])
     ppsorgo = 44400
     fecha = data2.columns[1][7:]
     st.title("🌾 Valuación de granos")
