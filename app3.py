@@ -326,9 +326,7 @@ def app4():
     if form.form_submit_button("Ingresar"):
         # Agregar las variables a la lista
         datos.append([region, propio, cantidad])
-        df = pd.DataFrame(datos, columns=['Región', 'Tipo de explotación', 'Superficie (has)'], index=[0], index_label='')
-        # Imprimir la lista de datos
-        st.table(df)
+        st.table(pd.DataFrame(datos, columns=['Región', 'Tipo de explotación', 'Superficie (has)'], index=[0], index_label=''))
         
         # API tipo de cambio
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
