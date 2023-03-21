@@ -272,7 +272,7 @@ def app4():
     # create a dictionary to store the regions for each crop type
     region_options = {
         "Soja 1ra": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
-        "Soja 2da": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
+        "Soja 2da": ["SE Bs As", "S Cordoba"],
         "Trigo": ["N Bs As / S Sta Fe", "S Entre Ríos", "SE Bs As"],
         "Maíz": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
         "Girasol": ["N Bs As / S Sta Fe", "SE Bs As", "S Cordoba"],
