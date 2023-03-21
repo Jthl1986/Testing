@@ -268,6 +268,8 @@ def app4():
     left, right = st.columns(2)
     left.write("Completar:")
     form = left.form("template_form")
+    # Crear un formulario para ingresar los datos de la siembra
+    form_siem = right.form("template_form_siem")
 
     # Obtener el valor actual de tipo de cultivo en la sesión actual
     tipo_cultivo = st.session_state.get('tipo_cultivo', None)
@@ -277,7 +279,7 @@ def app4():
         tipo_cultivo = "Soja 1ra"
 
     # Crear un menú desplegable para el tipo de cultivo y actualizar el valor en la sesión actual
-    tipo_cultivo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
+    tipo_cultivo = form_siem.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
     st.session_state['tipo_cultivo'] = tipo_cultivo
 
     # Cerrar el formulario
@@ -316,9 +318,6 @@ def app4():
             region_options = ["Región 16", "Región 17", "Región 18"]
         elif tipo_cultivo == "Cebada":
             region_options = ["Región 19", "Región 20", "Región 21"]
-            
-    # Crear un formulario para ingresar los datos de la siembra
-    form_siem = right.form("template_form_siem")
 
     # Crear un menú desplegable para la región
     region = form_siem.selectbox('Región: ', region_options)
