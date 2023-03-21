@@ -324,14 +324,20 @@ def app4():
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
 
-    # Agregar un botón de enviar para enviar los datos del formulario
+    # ... código del formulario ...
+    datos = []
     if form.form_submit_button("Ingresar"):
-        st.write("Valores ingresados:")
-        st.write("Tipo de cultivo:", tipo_cultivo)
-        st.write("Región:", region)
-        st.write("Tipo de explotación:", propio)
-        st.write("Superficie (has):", cantidad)
-        st.write("Rendimiento informado (en tn):", rinde)
+        # Agregar las variables a la lista
+        datos.append({
+            "tipo_cultivo": tipo_cultivo,
+            "region": region,
+            "propio": propio,
+            "cantidad": cantidad,
+            "rinde": rinde
+        })
+
+        # Imprimir la lista de datos
+        st.write(datos)
 
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
     response = requests.get(url)
