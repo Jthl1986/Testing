@@ -268,8 +268,6 @@ def app4():
     left, right = st.columns(2)
     left.write("Completar:")
     form = left.form("template_form")
-    # Crear un formulario para ingresar los datos de la siembra
-    form_siem = right.form("template_form_siem")
 
     # Obtener el valor actual de tipo de cultivo en la sesión actual
     tipo_cultivo = st.session_state.get('tipo_cultivo', None)
@@ -279,7 +277,7 @@ def app4():
         tipo_cultivo = "Soja 1ra"
 
     # Crear un menú desplegable para el tipo de cultivo y actualizar el valor en la sesión actual
-    tipo_cultivo = form_siem.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
+    tipo_cultivo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
     st.session_state['tipo_cultivo'] = tipo_cultivo
 
     # Cerrar el formulario
@@ -320,13 +318,13 @@ def app4():
             region_options = ["Región 19", "Región 20", "Región 21"]
 
     # Crear un menú desplegable para la región
-    region = form_siem.selectbox('Región: ', region_options)
-    propio = form_siem.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
-    cantidad = form_siem.number_input("Superficie (has): ", step=1)
-    rinde = form_siem.number_input("Rendimiento informado (en tn)")
+    region = form.selectbox('Región: ', region_options)
+    propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
+    cantidad = form.number_input("Superficie (has): ", step=1)
+    rinde = form.number_input("Rendimiento informado (en tn)")
 
     # Agregar un botón de enviar para enviar los datos del formulario
-    if form_siem.form_submit_button("Ingresar"):
+    if form.form_submit_button("Ingresar"):
         st.write("Formulario enviado con éxito!")
     else:
         st.write("Seleccione un tipo de cultivo para continuar")
