@@ -307,21 +307,11 @@ def app4():
         dol = float(value2)
     else:
         print("Failed to retrieve data")
+        
     right.metric("Dolar oficial", '${:,}'.format(float(dol)))
     right.write("Cuadro gastos:")
     gastos = right.number_input("Gastos de estructura", step=1)
     arrendamiento = right.number_input("Gastos de arrendamiento", step=1)
-
-
-    url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
-    response = requests.get(url)
-    if response.status_code == 200:
-        api_data = response.json()
-        value = api_data[0]['casa']['venta']
-        value2 = value.replace(',', '.')
-        dol = float(value2)
-    else:
-        print("Failed to retrieve data")
     
     #unpacking
     #workbook = openpyxl.load_workbook(r'C:\Users\Usuario\Desktop\dataframe.xlsx')
