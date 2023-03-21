@@ -346,6 +346,7 @@ def app4():
     right.write("Cuadro gastos:")
     gastos = right.number_input("Gastos de estructura", step=1)
     arrendamiento = right.number_input("Gastos de arrendamiento", step=1)
+    arrendamiento = right.number_input("Porcentaje de aparcería", step=1)
     
     #unpacking
     #workbook = openpyxl.load_workbook(r'C:\Users\Usuario\Desktop\dataframe.xlsx')
