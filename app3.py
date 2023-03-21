@@ -325,17 +325,12 @@ def app4():
     datos = []
     if form.form_submit_button("Ingresar"):
         # Agregar las variables a la lista
-        datos.append({
-            "tipo_cultivo": tipo_cultivo,
-            "region": region,
-            "propio": propio,
-            "cantidad": cantidad,
-            "rinde": rinde
-        })
+        datos.append([region, propio, cantidad])
 
         # Imprimir la lista de datos
-        st.write(datos)
-
+        st.table(datos)
+        
+        # API tipo de cambio
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
     response = requests.get(url)
     if response.status_code == 200:
