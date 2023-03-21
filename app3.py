@@ -349,7 +349,7 @@ def app4():
     aparceria = right.number_input("Porcentaje de aparcería", step=1)
     
     #unpacking
-    workbook = openpyxl.load_workbook(r'C:/Users/Usuario/Desktop/dataframe.xlsx')
+    workbook = openpyxl.load_workbook('C:/Users/Usuario/Desktop/dataframe.xlsx')
     worksheet = workbook.active
     header = [cell.value for cell in next(worksheet.iter_rows())]
     data = [cell.value for row in worksheet.iter_rows(min_row=2) for cell in row]
