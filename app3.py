@@ -295,9 +295,6 @@ def app4():
                 region = "Región 1"
             elif tipo_cultivo == "Soja 2da":
                 region = "Región 4"
-            elif tipo_cultivo == "Trigo":
-                region = "Región 7"
-            # Agregar más opciones de región para los otros tipos de cultivo
 
             st.session_state['region'] = region
 
