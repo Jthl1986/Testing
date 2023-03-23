@@ -371,7 +371,7 @@ def app4():
     else:
         print("No se pudo descargar el archivo")
 
-    st.write("sojaprice1")
+    st.write(result['sojaprice1'])
 
 
     
