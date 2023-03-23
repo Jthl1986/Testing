@@ -13,6 +13,15 @@ import openpyxl
 
 st.set_page_config(page_title="AgroAppCredicoop",page_icon="🌱",layout="wide") 
 
+#unpacking
+workbook = openpyxl.load_workbook(r'C:\Users\Usuario\Desktop\dataframe.xlsx')
+worksheet = workbook.active
+header = [cell.value for cell in next(worksheet.iter_rows())]
+data = [cell.value for row in worksheet.iter_rows(min_row=2) for cell in row]
+result = dict(zip(header, data))
+for key, value in result.items():
+    globals()[key] = value
+
 def copy_button():
     copy_button = Button(label="Copiar tabla")
     copy_button.js_on_event("button_click", CustomJS(args=dict(df=st.session_state.dfa.to_csv(sep='\t')), code="""
@@ -347,15 +356,6 @@ def app4():
     gastos = right.number_input("Gastos de estructura", step=1)
     arrendamiento = right.number_input("Gastos de arrendamiento", step=1)
     aparceria = right.number_input("Porcentaje de aparcería", step=1)
-    
-    #unpacking
-    workbook = openpyxl.load_workbook(r'C:\Users\Usuario\Desktop\dataframe.xlsx')
-    worksheet = workbook.active
-    header = [cell.value for cell in next(worksheet.iter_rows())]
-    data = [cell.value for row in worksheet.iter_rows(min_row=2) for cell in row]
-    result = dict(zip(header, data))
-    for key, value in result.items():
-        globals()[key] = value
     
     #precio = psoja1*dol*rinde*cantidad
     
