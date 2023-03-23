@@ -275,11 +275,6 @@ def app4():
     rinde = form.number_input("Rendimiento informado (en tn)")
     submit = form.form_submit_button("Ingresar")
 
-    # Crear un menú desplegable para la región
-    propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
-    cantidad = form.number_input("Superficie (has): ", step=1)
-    rinde = form.number_input("Rendimiento informado (en tn)")
-
     # ... código del formulario ...
     datos = []
     if form.form_submit_button("Ingresar"):
