@@ -273,7 +273,6 @@ def app4():
     propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
-    submit = form.form_submit_button("Ingresar")
 
     # ... código del formulario ...
     datos = []
