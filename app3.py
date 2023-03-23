@@ -348,6 +348,8 @@ def app4():
     arrendamiento = right.number_input("Gastos de arrendamiento", step=1)
     aparceria = right.number_input("Porcentaje de aparcería", step=1)
     
+    
+    #unpacking
     url = 'https://raw.githubusercontent.com/Jthl1986/Testing/master/dataframe.xlsx'
     r = requests.get(url)
     
@@ -369,6 +371,7 @@ def app4():
     else:
         print("No se pudo descargar el archivo")
 
+    st.write(result)
 
 
     
