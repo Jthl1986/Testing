@@ -264,8 +264,6 @@ def app3():
     
 
 def app4():
-    if "ingresos_totales" not in st.session_state:
-        st.session_state["ingresos_totales"] = 0
     st.title("🌽 Planteo productivo")
     region = st.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos","SE Bs As","S Cordoba"])
     left, right = st.columns(2)
@@ -277,23 +275,21 @@ def app4():
     rinde = form.number_input("Rendimiento informado (en tn)")
     submit = form.form_submit_button("Ingresar")
 
-    # Imprimir la lista de datos
-
-        
+    # Imprimir la lista de datos        
     def lista():
-        def valor():
+        def valor1():
             return cantidad + 1
-        valor = valor()
-        lista = [region, propio, cantidad, valor]
+        valors = valor1()
+        lista = [region, propio, cantidad, valors]
         return lista
     datos = []
     if "dfp" not in st.session_state:
         st.session_state.dfp = pd.DataFrame(columns=('Región', 'Tipo de explotación', 'Superficie (has)', 'Valor'))
     if submit:
         datos.append(lista())
-        st.session_state["ingresos_totales"] += cantidad+1
         dfo = pd.DataFrame(datos, columns=('Región', 'Tipo de explotación', 'Superficie (has)', 'Valor'))
         st.session_state.dfp = pd.concat([st.session_state.dfp, dfo])
+    st.table(st.session_state.dfp)
     css()
         
     # API tipo de cambio
@@ -336,12 +332,9 @@ def app4():
     else:
         print("No se pudo descargar el archivo")
     
-    return st.session_state.dfp
     #precio = psoja1*dol*rinde*cantidad
-    
     #costos directos
     #costodirecto = costo*dol*cantidad
-    
     #gasto de comercialización
     #gastoscom = porgastos*ibsoja1
     
