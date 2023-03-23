@@ -285,7 +285,7 @@ def app4():
         st.table(df)
         css()
         
-        # API tipo de cambio
+    # API tipo de cambio
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
     response = requests.get(url)
     if response.status_code == 200:
@@ -324,9 +324,6 @@ def app4():
     
     else:
         print("No se pudo descargar el archivo")
-
-
-
     
     #precio = psoja1*dol*rinde*cantidad
     
