@@ -265,58 +265,17 @@ def app3():
 
 def app4():
     st.title("🌽 Planteo productivo")
-    
-    # Obtener el valor actual de tipo de cultivo en la sesión actual
-    tipo_cultivo = st.session_state.get('tipo_cultivo', None)
-
-    # Si no hay un valor para tipo de cultivo, establecer el valor predeterminado como el primer elemento de la lista
-    if tipo_cultivo is None:
-        tipo_cultivo = "Soja 1ra"
-    
-    # Crear un menú desplegable para el tipo de cultivo y actualizar el valor en la sesión actual
-    tipo_cultivo = st.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"], index=[i for i, x in enumerate(["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"]) if x == tipo_cultivo][0])
-    st.session_state['tipo_cultivo'] = tipo_cultivo
-    
+    region = st.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos","SE Bs As","S Cordoba"])
     left, right = st.columns(2)
     left.write("Completar:")
-    form = left.form("template_form")
-
-    # Cerrar el formulario
-    form.empty()
-
-    # Si se ha seleccionado un tipo de cultivo, mostrar un menú desplegable para las regiones
-    if tipo_cultivo:
-        # Obtener el valor actual de la región en la sesión actual
-        region = st.session_state.get('region', None)
-
-        # Si no hay un valor para la región, establecer el valor predeterminado como el primer elemento de la lista correspondiente al tipo de cultivo
-        if region is None:
-            if tipo_cultivo == "Soja 1ra":
-                region = "Región 1"
-            elif tipo_cultivo == "Soja 2da":
-                region = "Región 4"
-
-            st.session_state['region'] = region
-
-        # Crear un menú desplegable para la región y actualizar el valor en la sesión actual
-        region_options = []
-        if tipo_cultivo == "Soja 1ra":
-            region_options = ["Región 1", "Región 2", "Región 3"]
-        elif tipo_cultivo == "Soja 2da":
-            region_options = ["Región 4", "Región 5", "Región 6"]
-        elif tipo_cultivo == "Trigo":
-            region_options = ["Región 7", "Región 8", "Región 9"]
-        elif tipo_cultivo == "Maíz":
-            region_options = ["Región 10", "Región 11", "Región 12"]
-        elif tipo_cultivo == "Girasol":
-            region_options = ["Región 13", "Región 14", "Región 15"]
-        elif tipo_cultivo == "Sorgo":
-            region_options = ["Región 16", "Región 17", "Región 18"]
-        elif tipo_cultivo == "Cebada":
-            region_options = ["Región 19", "Región 20", "Región 21"]
+    form = left.form("template_form") 
+    tipo = form.selectbox('Tipo de cultivo: ', ["Soja 1ra", "Soja 2da", "Trigo","Maíz","Girasol", "Sorgo", "Cebada"])
+    propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
+    cantidad = form.number_input("Superficie (has): ", step=1)
+    rinde = form.number_input("Rendimiento informado (en tn)")
+    submit = form.form_submit_button("Ingresar")
 
     # Crear un menú desplegable para la región
-    region = form.selectbox('Región: ', region_options)
     propio = form.selectbox('Tipo de explotación: ', ["Propia","Arrendado","Aparcería"])
     cantidad = form.number_input("Superficie (has): ", step=1)
     rinde = form.number_input("Rendimiento informado (en tn)")
@@ -371,7 +330,6 @@ def app4():
     else:
         print("No se pudo descargar el archivo")
 
-    st.write(result['sojaprice1'])
 
 
     
