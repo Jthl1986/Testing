@@ -294,7 +294,7 @@ def app4():
         st.session_state["ingresos_totales"] += cantidad+1
         dfo = pd.DataFrame(datos, columns=('Región', 'Tipo de explotación', 'Superficie (has)', 'Valor'))
         st.session_state.dfp = pd.concat([st.session_state.dfp, dfo])
-        css()
+    css()
         
     # API tipo de cambio
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
