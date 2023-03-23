@@ -265,7 +265,6 @@ def app3():
 
 def app4():
     st.title("🌽 Planteo productivo")
-    locacion = st.selectbox('Explota en diferentes regiones?: ', ["Si","No"])
     region = st.selectbox('Región: ', ["N Bs As / S Sta Fe","S Entre Ríos","SE Bs As","S Cordoba"])
     left, right = st.columns(2)
     left.write("Completar:")
