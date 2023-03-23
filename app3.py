@@ -295,7 +295,6 @@ def app4():
         dfo = pd.DataFrame(datos, columns=('Región', 'Tipo de explotación', 'Superficie (has)', 'Valor'))
         st.session_state.dfp = pd.concat([st.session_state.dfp, dfo])
     css()
-    return st.session_state.dfp
         
     # API tipo de cambio
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
@@ -337,6 +336,7 @@ def app4():
     else:
         print("No se pudo descargar el archivo")
     
+    return st.session_state.dfp
     #precio = psoja1*dol*rinde*cantidad
     
     #costos directos
