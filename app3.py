@@ -295,6 +295,7 @@ def app4():
         dfo = pd.DataFrame(datos, columns=('Región', 'Tipo de explotación', 'Superficie (has)', 'Valor'))
         st.session_state.dfp = pd.concat([st.session_state.dfp, dfo])
     css()
+    return st.session_state.dfp
         
     # API tipo de cambio
     url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
