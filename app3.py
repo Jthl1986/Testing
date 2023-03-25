@@ -10,6 +10,8 @@ import requests
 import streamlit.components.v1 as components
 import json
 import openpyxl
+import asyncio
+from pyppeteer import launch
 
 st.set_page_config(page_title="AgroAppCredicoop",page_icon="🌱",layout="wide") 
 
@@ -360,7 +362,29 @@ def app5():
     if dfa is not None:
         right.subheader("🐮 Existencias de hacienda")
         right.table(dfa.style.format({"Cantidad":"{:.0f}", "Peso":"{:.0f}", "Valuación":"${:,}"}))
+        
+    async def generate_pdf():
+        browser = await launch()
+        page = await browser.newPage()
+        await page.goto("http://localhost:8501")
+        pdf = await page.pdf()
+        await browser.close()
+        return pdf
 
+    def download_pdf(pdf):
+        b64 = base64.b64encode(pdf).decode("UTF-8")
+        href = f'<a href="data:application/octet-stream;base64,{b64}" download="streamlit.pdf">Download PDF</a>'
+        return href
+    
+    if __name__ == '__main__':
+        st.set_page_config(layout="wide")
+        st.title("Streamlit PDF Download")
+    
+        if st.button("Download PDF"):
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            pdf = loop.run_until_complete(generate_pdf())
+            st.markdown(download_pdf(pdf), unsafe_allow_html=True)
      
 #configuraciones de página   
 lottie_book = load_lottieurl('https://assets7.lottiefiles.com/packages/lf20_d7OjnJ.json')
